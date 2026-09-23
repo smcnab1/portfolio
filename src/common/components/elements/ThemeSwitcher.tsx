@@ -1,18 +1,17 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { useTheme } from 'next-themes';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { LuChevronsUpDown } from 'react-icons/lu';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 
+import useHasMounted from '@/common/hooks/useHasMounted';
+
 const ThemeSwitcher = () => {
   const { resolvedTheme, setTheme } = useTheme();
-
-  const [mounted, setMounted] = useState(false);
+  const mounted = useHasMounted();
 
   const toggleTheme = () =>
     setTheme(resolvedTheme === 'light' ? 'dark' : 'light');
-
-  useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 

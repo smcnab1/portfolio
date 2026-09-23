@@ -32,7 +32,6 @@ interface MenuOptionProps {
 
 const CommandPalette = () => {
   const [query, setQuery] = useState('');
-  const [isEmptyState, setEmptyState] = useState(false);
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
 
   const router = useRouter();
@@ -43,7 +42,7 @@ const CommandPalette = () => {
 
   const placeholders = [
     'Search this website...',
-    'Press Cmd + K anytime to access this command pallete',
+    'Press Cmd + K anytime to access this command palette',
   ];
 
   const placeholder = placeholders[placeholderIndex];
@@ -51,21 +50,21 @@ const CommandPalette = () => {
   const menuOptions: MenuOptionProps[] = [
     {
       title: 'PAGES',
-      children: MENU_ITEMS?.map((menu) => ({
+      children: MENU_ITEMS.map((menu) => ({
         ...menu,
         closeOnSelect: true,
       })),
     },
     {
       title: 'SOCIALS',
-      children: SOCIAL_MEDIA?.map((menu) => ({
+      children: SOCIAL_MEDIA.map((menu) => ({
         ...menu,
         closeOnSelect: true,
       })),
     },
     {
       title: 'EXTERNAL LINKS',
-      children: EXTERNAL_LINKS?.map((menu) => ({
+      children: EXTERNAL_LINKS.map((menu) => ({
         ...menu,
         closeOnSelect: true,
       })),
@@ -92,7 +91,7 @@ const CommandPalette = () => {
     },
   ];
 
-  const filterMenuOptions: MenuOptionProps[] = queryDebounce
+  const filteredMenuOptions: MenuOptionProps[] = queryDebounce
     ? menuOptions.map((menu) => ({
         ...menu,
         children: menu.children.filter((item) =>
@@ -101,61 +100,72 @@ const CommandPalette = () => {
       }))
     : menuOptions;
 
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      setQuery('');
+    }
+
+    setIsOpen(open);
+  };
+
   const handleSelect = (menu: MenuOptionItemProps) => {
     setQuery('');
 
-    if (menu.closeOnSelect) setIsOpen(false);
-
     menu.click?.();
 
+    if (menu.closeOnSelect) {
+      setIsOpen(false);
+    }
+
     if (menu.isExternal) {
-      window.open(menu.href, '_blank');
-    } else {
-      router.push(menu?.href as string);
+      window.open(menu.href, '_blank', 'noopener,noreferrer');
+    } else if (menu.href !== '#') {
+      router.push(menu.href);
     }
   };
 
   const handleSearch = ({
     target: { value },
-  }: React.ChangeEvent<HTMLInputElement>) => setQuery(value);
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(value);
+  };
 
   const handleFindGoogle = () => {
-    const url = 'https://www.google.com/search?q=' + queryDebounce;
-    window.open(url, '_blank');
+    const url = `https://www.google.com/search?q=${encodeURIComponent(
+      queryDebounce,
+    )}`;
+
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const isActiveRoute = (href: string) => {
-    return router.pathname === href;
-  };
+  const isActiveRoute = (href: string) => router.pathname === href;
 
   useEffect(() => {
-    if (query) setEmptyState(false);
-  }, [query]);
-
-  useEffect(() => {
-    if (!isMobile) {
-      const timer = setTimeout(() => {
-        setPlaceholderIndex((prevIndex) => (prevIndex === 0 ? 1 : 0));
-      }, 3000);
-
-      return () => {
-        clearTimeout(timer);
-      };
+    if (isMobile) {
+      return;
     }
+
+    const timer = setTimeout(() => {
+      setPlaceholderIndex((currentIndex) => (currentIndex === 0 ? 1 : 0));
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, [placeholderIndex, isMobile]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      setQuery('');
-      setEmptyState(false);
-    }
-  }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+
+        if (isOpen) {
+          setQuery('');
+        }
+
         setIsOpen(!isOpen);
-      } else if (event.key === 'Escape') {
+      }
+
+      if (event.key === 'Escape' && isOpen) {
+        setQuery('');
         setIsOpen(false);
       }
     };
@@ -168,7 +178,7 @@ const CommandPalette = () => {
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
-        onClose={setIsOpen}
+        onClose={handleOpenChange}
         className='fixed inset-0 z-[999] overflow-y-auto p-4 pt-[25vh]'
       >
         <Transition.Child
@@ -200,37 +210,34 @@ const CommandPalette = () => {
             >
               <div className='flex items-center gap-3 border-b border-neutral-300 px-4 dark:border-neutral-800'>
                 <SearchIcon size={22} />
+
                 <Combobox.Input
                   onChange={handleSearch}
-                  className='h-14 w-full border-0 bg-transparent  text-neutral-800 placeholder-neutral-500 focus:outline-none focus:ring-0 dark:text-neutral-200'
+                  className='h-14 w-full border-0 bg-transparent text-neutral-800 placeholder-neutral-500 focus:outline-none focus:ring-0 dark:text-neutral-200'
                   placeholder={placeholder}
                 />
               </div>
 
-              <div
-                className={clsx(
-                  'max-h-80 overflow-y-auto px-1 py-2',
-                  isEmptyState && '!py-0',
-                )}
-              >
-                {filterMenuOptions.map((menu) => (
+              <div className='max-h-80 overflow-y-auto px-1 py-2'>
+                {filteredMenuOptions.map((menu) => (
                   <div
                     key={menu.title}
                     className={clsx(
-                      menu?.children?.length === 0 && 'hidden',
+                      menu.children.length === 0 && 'hidden',
                       'py-1',
                     )}
                   >
                     <div className='my-2 px-5 text-xs font-medium text-neutral-500'>
-                      {menu?.title}
+                      {menu.title}
                     </div>
+
                     <Combobox.Options static className='space-y-1'>
-                      {menu?.children?.map((child, index) => (
+                      {menu.children.map((child, index) => (
                         <Combobox.Option key={index.toString()} value={child}>
                           {({ active }) => (
                             <div
                               className={clsx(
-                                active || isActiveRoute(child?.href)
+                                active || isActiveRoute(child.href)
                                   ? 'bg-neutral-200 text-neutral-600 dark:bg-neutral-700/60 dark:text-white'
                                   : 'text-neutral-600 dark:text-neutral-300',
                                 'group mx-2 flex cursor-pointer items-center justify-between gap-3 rounded-md px-4 py-2',
@@ -238,36 +245,33 @@ const CommandPalette = () => {
                               )}
                             >
                               <div className='flex items-center gap-5'>
-                                {child?.icon && (
+                                {child.icon && (
                                   <div
                                     className={clsx(
                                       'transition-all duration-300 group-hover:-rotate-12',
-                                      isActiveRoute(child?.href) &&
-                                        '-rotate-12',
+                                      isActiveRoute(child.href) && '-rotate-12',
                                     )}
                                   >
-                                    {child?.icon}
+                                    {child.icon}
                                   </div>
                                 )}
-                                <span className=''>
-                                  {child?.title} {active}
+
+                                <span>
+                                  {child.title} {active}
                                 </span>
                               </div>
-                              <>
-                                {isActiveRoute(child?.href) ? (
-                                  <span className='animate-pulse  text-xs text-neutral-500'>
-                                    You are here
-                                  </span>
-                                ) : (
-                                  <>
-                                    {child?.type && (
-                                      <div className='rounded-md border border-neutral-400 px-1.5 py-0.5  text-xs text-neutral-500 dark:border-neutral-500'>
-                                        {child?.type}
-                                      </div>
-                                    )}
-                                  </>
-                                )}
-                              </>
+
+                              {isActiveRoute(child.href) ? (
+                                <span className='animate-pulse text-xs text-neutral-500'>
+                                  You are here
+                                </span>
+                              ) : (
+                                child.type && (
+                                  <div className='rounded-md border border-neutral-400 px-1.5 py-0.5 text-xs text-neutral-500 dark:border-neutral-500'>
+                                    {child.type}
+                                  </div>
+                                )
+                              )}
                             </div>
                           )}
                         </Combobox.Option>
@@ -277,9 +281,8 @@ const CommandPalette = () => {
                 ))}
               </div>
 
-              {!isEmptyState &&
-                queryDebounce &&
-                filterMenuOptions.every(
+              {queryDebounce &&
+                filteredMenuOptions.every(
                   (item) => item.children.length === 0,
                 ) && (
                   <QueryNotFound

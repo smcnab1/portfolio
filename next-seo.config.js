@@ -1,7 +1,7 @@
 const canonicalUrl = 'https://sammcnab.co.uk';
 const metaImage = 'https://sammcnab.co.uk/images/my-avatar.png';
 const metaDescription =
-  'University Lecturer, Registered Paramedic and Healthcare Simulationist specialising in immersive technologies.';
+  'Senior Lecturer, Registered Paramedic and specialist in Healthcare Simulation & Immersive Technologies.';
 
 const defaultSEOConfig = {
   defaultTitle: 'Sam McNab - Personal Website',

@@ -9,9 +9,8 @@ const Introduction = () => {
       </div>
 
       <p className='mt-6 leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
-        I&apos;m a University Lecturer, Healthcare Simulationist and Registered
-        Paramedic specialising in immersive technologies for healthcare
-        education.
+        I&apos;m a Senior Lecturer, Registered Paramedic and specialist in
+        Healthcare Simulation & Immersive Technologies.
       </p>
     </section>
   );

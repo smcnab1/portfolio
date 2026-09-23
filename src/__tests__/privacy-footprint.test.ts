@@ -32,9 +32,11 @@ describe('privacy-focused public profile', () => {
   it('retains the limited professional identity and selected projects', () => {
     const publicProfile = publicProfileFiles.join('\n');
 
-    expect(publicProfile).toContain('University Lecturer');
+    expect(publicProfile).toContain('Senior Lecturer');
     expect(publicProfile).toContain('Registered Paramedic');
-    expect(publicProfile).toContain('immersive technologies');
+    expect(publicProfile).toContain(
+      'Healthcare Simulation & Immersive Technologies',
+    );
     expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(2);
   });
 

@@ -3,15 +3,15 @@ import { ProjectItemProps } from '../types/projects';
 export const PROJECTS: ProjectItemProps[] = [
   {
     id: 'portfolio-1',
-    title: 'Personal Portfolio',
-    slug: 'personal-portfolio',
+    title: 'Portfolio',
+    slug: 'portfolio',
     description:
       'A modern, responsive portfolio website built with Next.js and TypeScript.',
     content: undefined,
     image: '/images/placeholder.png',
     linkDemo: 'https://sammcnab.co.uk',
-    linkGithub: 'https://github.com/smcnab1/personal-portfolio',
-    stacks: 'Next.js, TypeScript, Tailwind CSS, Prisma',
+    linkGithub: 'https://github.com/smcnab1/portfolio',
+    stacks: 'Next.js, TypeScript, Tailwind CSS, Vercel',
     isShow: true,
     isFeatured: true,
     createdAt: new Date('2024-01-01'),

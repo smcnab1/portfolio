@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
-const useHasMounted = () => {
-  const [hasMounted, setHasMounted] = useState<boolean>(false);
+const emptySubscribe = () => () => {};
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  return hasMounted;
-};
+const useHasMounted = () =>
+  useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
 export default useHasMounted;

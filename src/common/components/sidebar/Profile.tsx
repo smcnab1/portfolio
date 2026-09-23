@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { MenuContext } from '@/common/context/MenuContext';
 import useIsMobile from '@/common/hooks/useIsMobile';
 
+import SearchBox from '../elements/SearchBox';
+import ThemeToggleButton from '../elements/ThemeToggleButton';
 import MobileMenu from './MobileMenu';
 import MobileMenuButton from './MobileMenuButton';
 import ProfileHeader from './ProfileHeader';
-import SearchBox from '../elements/SearchBox';
-import ThemeToggleButton from '../elements/ThemeToggleButton';
 
 interface ProfileProps {
   isScrolled?: boolean;

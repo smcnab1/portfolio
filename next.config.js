@@ -6,9 +6,7 @@ const nextConfig = {
       '@headlessui/react',
       'react-icons',
       'framer-motion',
-      'date-fns',
       'react-syntax-highlighter',
-      'react-use-draggable-scroll',
       'usehooks-ts',
     ],
   },
@@ -30,9 +28,6 @@ const nextConfig = {
   onDemandEntries: {
     maxInactiveAge: 25 * 1000,
     pagesBufferLength: 2,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   // Output optimization
   output: 'standalone',
