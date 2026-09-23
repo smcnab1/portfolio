@@ -2,8 +2,6 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /auth/
-Disallow: /cms
 
 # Host
 Host: https://sammcnab.co.uk
