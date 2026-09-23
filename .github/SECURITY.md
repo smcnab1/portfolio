@@ -1,22 +1,37 @@
 # Security Policy
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-If you have identified a security vulnerability in system or product please get in touch via [sammcnab.co.uk/contact](https://sammcnab.co.uk/contact) with your findings. We strongly recommend using our `PGP key` to prevent this information from falling into the wrong hands.
+If you believe you have identified a security vulnerability affecting this repository or [sammcnab.co.uk](https://sammcnab.co.uk), please report it privately via:
 
-### Disclosure Policy
+**https://sammcnab.co.uk/contact**
 
-Upon receipt of a security report the following steps will be taken:
+Please do not disclose security vulnerabilities through public GitHub issues, discussions or pull requests.
 
-- Acknowledge your report within 48 hours, and provide a further more detailed update within 48 hours.
-- Confirm the problem and determine the affected versions
-- Keep you informed of the progress towards resolving the problem and notify you when the vulnerability has been fixed.
-- Audit code to find any potential similar problems.
-- Prepare fixes for all releases still under maintenance. These fixes will be released as fast as possible.
-- Handle your report with strict confidentiality, and not pass on your personal details to third parties without your permission.
+When reporting a vulnerability, include enough information to help understand and reproduce the issue where it is safe to do so, such as:
 
-Whilst the issue is under investigation
+- A clear description of the vulnerability.
+- The affected page, component or functionality.
+- Steps required to reproduce the issue.
+- The potential security impact.
+- Relevant browser, operating-system or environment details.
 
-- **Do** provide as much information as possible.
-- **Do not** exploit of the vulnerability or problem you have discovered.
-- **Do not** reveal the problem to others until it has been resolved.
+Do not include passwords, access tokens, API keys, private keys, personal information or other sensitive data.
+
+## Responsible disclosure
+
+Please avoid:
+
+- Accessing or modifying data that does not belong to you.
+- Attempting to gain persistent or unauthorised access.
+- Disrupting the website or associated services.
+- Performing denial-of-service testing.
+- Publicly disclosing vulnerability details before they have been reviewed.
+
+Security reports will be reviewed and addressed according to their severity and impact.
+
+## Supported version
+
+The actively maintained version is the version currently deployed from the repository's default branch.
+
+Older releases and historical versions are not actively supported.
