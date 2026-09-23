@@ -1,3 +1,7 @@
+import 'tailwindcss/tailwind.css';
+import 'aos/dist/aos.css';
+import '@/common/styles/globals.css';
+
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AOS from 'aos';
@@ -6,10 +10,6 @@ import dynamic from 'next/dynamic';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
 import { useEffect } from 'react';
-
-import 'tailwindcss/tailwind.css';
-import 'aos/dist/aos.css';
-import '@/common/styles/globals.css';
 
 import CommandPalette from '@/common/components/elements/CommandPalette';
 import Layout from '@/common/components/layouts';

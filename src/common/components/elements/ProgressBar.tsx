@@ -1,8 +1,8 @@
+import 'nprogress/nprogress.css';
+
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { FC } from 'react';
-
-import 'nprogress/nprogress.css';
 
 NProgress.configure({
   minimum: 0.3,

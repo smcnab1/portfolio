@@ -1,7 +1,7 @@
 import { MENU_APPS, MENU_ITEMS } from '@/common/constant/menu';
 
-import Menu from './Menu';
 import Breakline from '../elements/Breakline';
+import Menu from './Menu';
 
 const Navigation = () => {
   const filteredMenu = MENU_ITEMS?.filter((item) => item?.isShow);

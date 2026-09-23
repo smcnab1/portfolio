@@ -10,10 +10,6 @@ interface TabsProps {
   tabs: TabProps[];
 }
 
-export const Tab = ({ children }: TabProps) => {
-  return <>{children}</>;
-};
-
 export const Tabs = ({ tabs }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(0);
 
