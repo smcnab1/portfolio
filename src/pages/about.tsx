@@ -7,12 +7,16 @@ import About from '@/modules/about';
 
 const PAGE_TITLE = 'About';
 const PAGE_DESCRIPTION =
-  'University Lecturer, Registered Paramedic and Healthcare Simulationist specialising in immersive technologies.';
+  'Experience across clinical practice, healthcare simulation, academic leadership and software development.';
 
 const AboutPage: NextPage = () => {
   return (
     <>
-      <NextSeo title={`${PAGE_TITLE} - Sam McNab`} />
+      <NextSeo
+        title={`${PAGE_TITLE} | Sam McNab`}
+        description={PAGE_DESCRIPTION}
+        canonical='https://sammcnab.co.uk/about'
+      />
       <Container data-aos='fade-up'>
         <PageHeading title={PAGE_TITLE} description={PAGE_DESCRIPTION} />
         <About />
