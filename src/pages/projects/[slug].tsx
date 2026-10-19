@@ -21,20 +21,21 @@ const ProjectsDetailPage: NextPage<ProjectsDetailPageProps> = ({ project }) => {
   return (
     <>
       <NextSeo
-        title={`${project?.title} - Project Sam McNab`}
+        title={`${project?.title} | Sam McNab`}
         description={project?.description}
         canonical={canonicalUrl}
         openGraph={{
           type: 'article',
           article: {
-            publishedTime: project?.updatedAt.toString(),
+            publishedTime: project?.createdAt.toString(),
             modifiedTime: project?.updatedAt.toString(),
             authors: ['Sam McNab'],
           },
           url: canonicalUrl,
           images: [
             {
-              url: project?.image || '/images/placeholder.png',
+              url: `https://sammcnab.co.uk${project?.image}`,
+              alt: project?.imageAlt || project?.title,
             },
           ],
           siteName: 'Sam McNab',

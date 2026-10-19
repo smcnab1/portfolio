@@ -5,6 +5,9 @@ export interface ProjectItemProps {
   description: string;
   content?: string;
   image: string | null;
+  imageAlt?: string;
+  imageCaption?: string;
+  status?: string;
   linkDemo?: string | null;
   linkGithub?: string | null;
   stacks: string | null;

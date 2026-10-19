@@ -25,7 +25,7 @@ const LinkComponent = ({ url, text, icon, title }: LinkComponentProps) => {
       target='_blank'
       rel='noopener noreferrer'
       data-umami-event={eventName}
-      className='flex items-center gap-2 font-medium text-neutral-700 dark:text-neutral-300'
+      className='flex items-center gap-2 rounded font-medium text-neutral-700 hover:text-teal-700 dark:text-neutral-300 dark:hover:text-teal-400'
     >
       {icon}
       <span className='text-[15px] transition-all duration-300 dark:text-teal-500 hover:dark:text-teal-400'>
@@ -53,7 +53,7 @@ const ProjectLink = ({ title, linkGithub, linkDemo }: ProjectLinkProps) => (
     {linkDemo && (
       <LinkComponent
         url={linkDemo}
-        text='Live Demo'
+        text='Visit website'
         title={title}
         icon={<LinkIcon size={22} />}
       />
