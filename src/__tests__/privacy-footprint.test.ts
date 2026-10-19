@@ -49,6 +49,25 @@ describe('privacy-focused public profile', () => {
     ]);
   });
 
+  it('uses verified case-study timestamps independently of project status', () => {
+    const firstCaseStudies = ['simhq', 'portfolio'];
+
+    for (const project of PROJECTS) {
+      const expectedTimestamp = firstCaseStudies.includes(project.slug)
+        ? '2026-10-19T10:05:59Z'
+        : '2026-10-19T10:24:03Z';
+
+      expect(project.caseStudyPublishedAt).toBe(expectedTimestamp);
+      expect(project.caseStudyUpdatedAt).toBe(expectedTimestamp);
+      expect(new Date(project.caseStudyPublishedAt).toISOString()).toBe(
+        new Date(expectedTimestamp).toISOString(),
+      );
+      expect(project.status).toBeTruthy();
+      expect(project).not.toHaveProperty('createdAt');
+      expect(project).not.toHaveProperty('updatedAt');
+    }
+  });
+
   it('does not publish private details or turn training into employment', () => {
     const publicProfile = publicProfileFiles.join('\n');
 

@@ -15,8 +15,8 @@ export interface ProjectItemProps {
   stacks: string | null;
   isShow: boolean;
   isFeatured: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  caseStudyPublishedAt: string;
+  caseStudyUpdatedAt: string;
   sortOrder: number;
 }
 

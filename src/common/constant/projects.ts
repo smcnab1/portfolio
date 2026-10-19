@@ -1,5 +1,10 @@
 import { ProjectItemProps } from '../types/projects';
 
+// Case-study timestamps come from the commits that added the published content.
+// They do not describe when the underlying projects were created or updated.
+const INITIAL_CASE_STUDIES_AT = '2026-10-19T10:05:59Z';
+const ADDITIONAL_CASE_STUDIES_AT = '2026-10-19T10:24:03Z';
+
 export const PROJECTS: ProjectItemProps[] = [
   {
     id: 'simhq',
@@ -38,8 +43,8 @@ Explore the [public SimHQ website](https://simhq.app/) and [Rooms overview](http
     stacks: 'Next.js, React.js, TypeScript, Tailwind CSS, Convex, WorkOS',
     isShow: true,
     isFeatured: true,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: INITIAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: INITIAL_CASE_STUDIES_AT,
     sortOrder: 1,
   },
   {
@@ -75,8 +80,8 @@ This is a live personal web application and public demonstration, with fictional
     stacks: 'HTML, CSS, JavaScript, Browser storage',
     isShow: true,
     isFeatured: false,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
     sortOrder: 2,
   },
   {
@@ -124,8 +129,8 @@ Released for macOS in the Raycast Store. [Install Cheatsheets Remastered](https:
     stacks: 'TypeScript, React, Raycast API, Markdown, Local storage',
     isShow: true,
     isFeatured: false,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
     sortOrder: 3,
   },
   {
@@ -173,8 +178,8 @@ Released for macOS in the Raycast Store. [Install Gradient Generator](https://ww
     stacks: 'TypeScript, React, Raycast API, SVG, PNG, Local storage',
     isShow: true,
     isFeatured: false,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
     sortOrder: 4,
   },
   {
@@ -218,8 +223,8 @@ Released for macOS in the Raycast Store. [Install Luxafor Controller](https://ww
       'TypeScript, React, Raycast API, Luxafor Webhook API, Local storage',
     isShow: true,
     isFeatured: false,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
     sortOrder: 5,
   },
   {
@@ -253,8 +258,8 @@ You can [visit the live website](https://sammcnab.co.uk) or [view its public sou
     stacks: 'Next.js, React.js, TypeScript, Tailwind CSS, Vercel',
     isShow: true,
     isFeatured: false,
-    createdAt: new Date('2026-10-19'),
-    updatedAt: new Date('2026-10-19'),
+    caseStudyPublishedAt: INITIAL_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: INITIAL_CASE_STUDIES_AT,
     sortOrder: 6,
   },
 ];
