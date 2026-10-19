@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { EXPERIENCE } from '@/common/constant/experience';
 import { MENU_ITEMS, SOCIAL_MEDIA } from '@/common/constant/menu';
 import { PROJECTS } from '@/common/constant/projects';
 
@@ -10,6 +11,8 @@ const publicProfileFiles = [
   'src/modules/home/components/Introduction.tsx',
   'src/modules/home/components/Services.tsx',
   'src/modules/about/components/Story.tsx',
+  'src/common/constant/experience.ts',
+  'src/common/constant/projects.ts',
   'src/common/components/sidebar/ProfileHeader.tsx',
 ].map((file) => fs.readFileSync(path.join(repositoryRoot, file), 'utf8'));
 
@@ -29,15 +32,30 @@ describe('privacy-focused public profile', () => {
     expect(publicProfileFiles.join('\n')).not.toContain('@smc' + 'nab1');
   });
 
-  it('retains the limited professional identity and selected projects', () => {
+  it('retains the professional identity and selected projects', () => {
     const publicProfile = publicProfileFiles.join('\n');
 
     expect(publicProfile).toContain('Senior Lecturer');
     expect(publicProfile).toContain('Registered Paramedic');
-    expect(publicProfile).toContain(
-      'Healthcare Simulation & Immersive Technologies',
-    );
+    expect(EXPERIENCE).toHaveLength(7);
     expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(2);
+    expect(PROJECTS.map((project) => project.slug)).toEqual([
+      'simhq',
+      'portfolio',
+    ]);
+  });
+
+  it('does not publish private details or turn training into employment', () => {
+    const publicProfile = publicProfileFiles.join('\n');
+
+    expect(publicProfile).not.toMatch(/\b(?:\+44|0)7\d{9}\b/);
+    expect(publicProfile).not.toMatch(/\bADHD\b/i);
+    expect(publicProfile).not.toContain(
+      'Cybersecurity & Security Operations Practitioner',
+    );
+    expect(
+      PROJECTS.every((project) => project.image !== '/images/placeholder.png'),
+    ).toBe(true);
   });
 
   it('pins generated sitemap URLs to the working apex domain', () => {
