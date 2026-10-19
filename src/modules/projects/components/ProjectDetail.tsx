@@ -12,9 +12,11 @@ const ProjectDetail = ({
   image,
   imageAlt,
   imageCaption,
+  gallery,
   status,
   stacks,
   linkDemo,
+  linkDemoLabel,
   linkGithub,
   content,
 }: ProjectItemProps) => {
@@ -43,6 +45,7 @@ const ProjectDetail = ({
         <ProjectLink
           title={title}
           linkDemo={linkDemo}
+          linkDemoLabel={linkDemoLabel}
           linkGithub={linkGithub}
         />
       </div>
@@ -67,6 +70,31 @@ const ProjectDetail = ({
         <div className='space-y-5 leading-relaxed text-neutral-800 dark:text-neutral-300'>
           <MDXComponent>{content}</MDXComponent>
         </div>
+      )}
+      {gallery && gallery.length > 0 && (
+        <section aria-label='More project screenshots' className='space-y-3'>
+          <h2 className='text-lg font-semibold'>More screenshots</h2>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            {gallery.map(({ image: galleryImage, alt, caption }) => (
+              <figure
+                key={galleryImage}
+                className='overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800'
+              >
+                <Image
+                  src={galleryImage}
+                  width={1400}
+                  height={875}
+                  sizes='(max-width: 640px) 100vw, 400px'
+                  alt={alt}
+                  className='h-auto w-full'
+                />
+                <figcaption className='px-4 py-3 text-xs text-neutral-600 dark:text-neutral-400'>
+                  {caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
       )}
       <p className='border-t border-neutral-200 pt-6 text-sm dark:border-neutral-800'>
         <Link

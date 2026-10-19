@@ -14,6 +14,7 @@ interface ProjectLinkProps {
   title?: string;
   linkGithub?: string | null;
   linkDemo?: string | null;
+  linkDemoLabel?: string;
 }
 
 const LinkComponent = ({ url, text, icon, title }: LinkComponentProps) => {
@@ -35,7 +36,12 @@ const LinkComponent = ({ url, text, icon, title }: LinkComponentProps) => {
   );
 };
 
-const ProjectLink = ({ title, linkGithub, linkDemo }: ProjectLinkProps) => (
+const ProjectLink = ({
+  title,
+  linkGithub,
+  linkDemo,
+  linkDemoLabel = 'Visit website',
+}: ProjectLinkProps) => (
   <div className='flex gap-4'>
     {linkGithub && (
       <LinkComponent
@@ -53,7 +59,7 @@ const ProjectLink = ({ title, linkGithub, linkDemo }: ProjectLinkProps) => (
     {linkDemo && (
       <LinkComponent
         url={linkDemo}
-        text='Visit website'
+        text={linkDemoLabel}
         title={title}
         icon={<LinkIcon size={22} />}
       />

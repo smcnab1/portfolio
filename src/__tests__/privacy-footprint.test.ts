@@ -38,9 +38,13 @@ describe('privacy-focused public profile', () => {
     expect(publicProfile).toContain('Senior Lecturer');
     expect(publicProfile).toContain('Registered Paramedic');
     expect(EXPERIENCE).toHaveLength(7);
-    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(2);
+    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(6);
     expect(PROJECTS.map((project) => project.slug)).toEqual([
       'simhq',
+      'modumate',
+      'cheatsheets-remastered',
+      'gradient-generator',
+      'luxafor-controller',
       'portfolio',
     ]);
   });
@@ -56,6 +60,25 @@ describe('privacy-focused public profile', () => {
     expect(
       PROJECTS.every((project) => project.image !== '/images/placeholder.png'),
     ).toBe(true);
+    expect(
+      PROJECTS.every(
+        (project) =>
+          project.image?.startsWith('/images/projects/') &&
+          project.gallery?.every((item) =>
+            item.image.startsWith('/images/projects/'),
+          ) !== false,
+      ),
+    ).toBe(true);
+    for (const project of PROJECTS) {
+      for (const image of [
+        project.image,
+        ...(project.gallery?.map((item) => item.image) || []),
+      ]) {
+        expect(
+          fs.existsSync(path.join(repositoryRoot, 'public', image || '')),
+        ).toBe(true);
+      }
+    }
   });
 
   it('pins generated sitemap URLs to the working apex domain', () => {
