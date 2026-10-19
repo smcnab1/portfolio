@@ -1,39 +1,45 @@
-import Router from 'next/router';
-import { BiRocket as RocketIcon } from 'react-icons/bi';
+import Link from 'next/link';
 
-import Button from '@/common/components/elements/Button';
 import Card from '@/common/components/elements/Card';
 import SectionHeading from '@/common/components/elements/SectionHeading';
 
-const Services = () => {
-  return (
-    <section className='space-y-5'>
-      <div className='space-y-3'>
-        <SectionHeading title='Professional focus' />
-        <p className='leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
-          I design and deliver simulation-based education and immersive learning
-          experiences for healthcare learners. My work brings together clinical
-          practice, education and technology.
+const Services = () => (
+  <section className='space-y-5'>
+    <SectionHeading title='Where my work meets' />
+    <div className='grid gap-4 sm:grid-cols-3'>
+      <Card className='space-y-2 rounded-xl border border-neutral-200 p-5 dark:border-neutral-800'>
+        <h3 className='font-semibold'>Clinical practice</h3>
+        <p className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+          Frontline paramedic experience grounds my approach in real clinical
+          work.
         </p>
-      </div>
-      <Card className='space-y-4 rounded-xl border bg-neutral-100 p-8 dark:border-none dark:bg-[#1e1e1e]'>
-        <div className='flex items-center gap-2'>
-          <RocketIcon size={24} />
-          <h3 className='text-xl font-medium'>Selected projects</h3>
-        </div>
-        <p className='pl-2 leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
-          Explore a concise selection of my work in healthcare simulation,
-          immersive learning and digital products.
-        </p>
-        <Button
-          data-umami-event='Click Projects Button'
-          onClick={() => Router.push('/projects')}
-        >
-          View projects
-        </Button>
       </Card>
-    </section>
-  );
-};
+      <Card className='space-y-2 rounded-xl border border-neutral-200 p-5 dark:border-neutral-800'>
+        <h3 className='font-semibold'>Simulation & education</h3>
+        <p className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+          I design learning and help teams deliver simulation across healthcare
+          programmes.
+        </p>
+      </Card>
+      <Card className='space-y-2 rounded-xl border border-neutral-200 p-5 dark:border-neutral-800'>
+        <h3 className='font-semibold'>Software development</h3>
+        <p className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+          I build practical digital tools, including SimHQ, for complex
+          operational needs.
+        </p>
+      </Card>
+    </div>
+    <p className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
+      See the work behind that approach in my{' '}
+      <Link
+        href='/projects'
+        className='text-teal-700 underline underline-offset-4 dark:text-teal-400'
+      >
+        project case studies
+      </Link>
+      .
+    </p>
+  </section>
+);
 
 export default Services;

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { EXPERIENCE } from '@/common/constant/experience';
 import { MENU_ITEMS, SOCIAL_MEDIA } from '@/common/constant/menu';
 import { PROJECTS } from '@/common/constant/projects';
 
@@ -10,6 +11,8 @@ const publicProfileFiles = [
   'src/modules/home/components/Introduction.tsx',
   'src/modules/home/components/Services.tsx',
   'src/modules/about/components/Story.tsx',
+  'src/common/constant/experience.ts',
+  'src/common/constant/projects.ts',
   'src/common/components/sidebar/ProfileHeader.tsx',
 ].map((file) => fs.readFileSync(path.join(repositoryRoot, file), 'utf8'));
 
@@ -29,15 +32,72 @@ describe('privacy-focused public profile', () => {
     expect(publicProfileFiles.join('\n')).not.toContain('@smc' + 'nab1');
   });
 
-  it('retains the limited professional identity and selected projects', () => {
+  it('retains the professional identity and selected projects', () => {
     const publicProfile = publicProfileFiles.join('\n');
 
     expect(publicProfile).toContain('Senior Lecturer');
     expect(publicProfile).toContain('Registered Paramedic');
-    expect(publicProfile).toContain(
-      'Healthcare Simulation & Immersive Technologies',
+    expect(EXPERIENCE).toHaveLength(7);
+    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(6);
+    expect(PROJECTS.map((project) => project.slug)).toEqual([
+      'simhq',
+      'modumate',
+      'cheatsheets-remastered',
+      'gradient-generator',
+      'luxafor-controller',
+      'portfolio',
+    ]);
+  });
+
+  it('uses verified case-study timestamps independently of project status', () => {
+    const firstCaseStudies = ['simhq', 'portfolio'];
+
+    for (const project of PROJECTS) {
+      const expectedTimestamp = firstCaseStudies.includes(project.slug)
+        ? '2026-10-19T10:05:59Z'
+        : '2026-10-19T10:24:03Z';
+
+      expect(project.caseStudyPublishedAt).toBe(expectedTimestamp);
+      expect(project.caseStudyUpdatedAt).toBe(expectedTimestamp);
+      expect(new Date(project.caseStudyPublishedAt).toISOString()).toBe(
+        new Date(expectedTimestamp).toISOString(),
+      );
+      expect(project.status).toBeTruthy();
+      expect(project).not.toHaveProperty('createdAt');
+      expect(project).not.toHaveProperty('updatedAt');
+    }
+  });
+
+  it('does not publish private details or turn training into employment', () => {
+    const publicProfile = publicProfileFiles.join('\n');
+
+    expect(publicProfile).not.toMatch(/\b(?:\+44|0)7\d{9}\b/);
+    expect(publicProfile).not.toMatch(/\bADHD\b/i);
+    expect(publicProfile).not.toContain(
+      'Cybersecurity & Security Operations Practitioner',
     );
-    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(2);
+    expect(
+      PROJECTS.every((project) => project.image !== '/images/placeholder.png'),
+    ).toBe(true);
+    expect(
+      PROJECTS.every(
+        (project) =>
+          project.image?.startsWith('/images/projects/') &&
+          project.gallery?.every((item) =>
+            item.image.startsWith('/images/projects/'),
+          ) !== false,
+      ),
+    ).toBe(true);
+    for (const project of PROJECTS) {
+      for (const image of [
+        project.image,
+        ...(project.gallery?.map((item) => item.image) || []),
+      ]) {
+        expect(
+          fs.existsSync(path.join(repositoryRoot, 'public', image || '')),
+        ).toBe(true);
+      }
+    }
   });
 
   it('pins generated sitemap URLs to the working apex domain', () => {
