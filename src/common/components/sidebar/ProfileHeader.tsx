@@ -23,6 +23,7 @@ const ProfileHeader = ({ expandMenu, imageSize }: ProfileHeaderProps) => {
         alt='Sam McNab'
         width={expandMenu ? 80 : imageSize}
         height={expandMenu ? 80 : imageSize}
+        loading='eager'
         rounded='rounded-full'
         className='rotate-3 dark:border-neutral-600 lg:hover:scale-105'
       />
