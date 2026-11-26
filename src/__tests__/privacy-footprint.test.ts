@@ -38,9 +38,11 @@ describe('privacy-focused public profile', () => {
     expect(publicProfile).toContain('Senior Lecturer');
     expect(publicProfile).toContain('Registered Paramedic');
     expect(EXPERIENCE).toHaveLength(7);
-    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(6);
+    expect(PROJECTS.filter((project) => project.isShow)).toHaveLength(8);
     expect(PROJECTS.map((project) => project.slug)).toEqual([
       'simhq',
+      'pokelet',
+      'simugen',
       'modumate',
       'cheatsheets-remastered',
       'gradient-generator',
@@ -50,12 +52,16 @@ describe('privacy-focused public profile', () => {
   });
 
   it('uses verified case-study timestamps independently of project status', () => {
-    const firstCaseStudies = ['simhq', 'portfolio'];
+    const publicationDates: Record<string, string> = {
+      simhq: '2026-10-19T10:05:59Z',
+      portfolio: '2026-10-19T10:05:59Z',
+      pokelet: '2026-11-23T00:00:00Z',
+      simugen: '2026-11-23T00:00:00Z',
+    };
 
     for (const project of PROJECTS) {
-      const expectedTimestamp = firstCaseStudies.includes(project.slug)
-        ? '2026-10-19T10:05:59Z'
-        : '2026-10-19T10:24:03Z';
+      const expectedTimestamp =
+        publicationDates[project.slug] ?? '2026-10-19T10:24:03Z';
 
       expect(project.caseStudyPublishedAt).toBe(expectedTimestamp);
       expect(project.caseStudyUpdatedAt).toBe(expectedTimestamp);

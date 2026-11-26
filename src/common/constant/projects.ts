@@ -4,6 +4,8 @@ import { ProjectItemProps } from '../types/projects';
 // They do not describe when the underlying projects were created or updated.
 const INITIAL_CASE_STUDIES_AT = '2026-10-19T10:05:59Z';
 const ADDITIONAL_CASE_STUDIES_AT = '2026-10-19T10:24:03Z';
+// Provisional: replace with the commit timestamp when these entries are published.
+const NEW_CASE_STUDIES_AT = '2026-11-23T00:00:00Z';
 
 export const PROJECTS: ProjectItemProps[] = [
   {
@@ -48,6 +50,104 @@ Explore the [public SimHQ website](https://simhq.app/) and [Rooms overview](http
     sortOrder: 1,
   },
   {
+    id: 'pokelet',
+    title: 'Pokelet - macOS Cursor Companion',
+    slug: 'pokelet',
+    description:
+      'A playful, native macOS app with animated cursor characters and presentation tools.',
+    content: `## The problem
+
+During screen sharing, presentations and teaching, a standard mouse pointer can be easy to lose track of. Personalising the cursor can also mean relying on separate utilities.
+
+## The solution and features
+
+Pokelet is a free, open-source macOS app with four pointer characters: a pointing finger, cat paw, foam finger and comic arrow. It includes adjustable colours and sizes, Companion and Click-only modes, Presenter Arm, custom click effects and optional sounds. Pokelet Studio brings its controls together in a native Mac interface.
+
+## Technologies and my contribution
+
+I designed and developed Pokelet using Swift and SwiftUI, working across interaction design, animation, application behaviour, testing, packaging and public releases. The project is maintained through GitHub with documentation, build checks and issue tracking.
+
+## Privacy and current status
+
+Pokelet works locally without an account or telemetry. Public beta builds are available for macOS 14 or later on Apple silicon and Intel Macs. Installation and update instructions are provided with each release.
+
+[Download Pokelet](https://github.com/smcnab1/pokelet/releases), [explore the project website](https://smcnab1.github.io/pokelet/) or [view the source on GitHub](https://github.com/smcnab1/pokelet).`,
+    image: '/images/projects/pokelet-studio.webp',
+    imageAlt:
+      'Pokelet Studio on macOS showing settings for the animated cursor companion',
+    imageCaption:
+      'Pokelet Studio, the native macOS interface for personalising cursor behaviour.',
+    gallery: [
+      {
+        image: '/images/projects/pokelet-studio.webp',
+        alt: 'Pokelet Studio on macOS showing settings for the animated cursor companion',
+        caption:
+          'Pokelet Studio, the native macOS interface for personalising cursor behaviour.',
+      },
+      {
+        image: '/images/projects/pokelet-cursors.webp',
+        alt: 'Pokelet pointing finger, cat paw, foam finger and comic arrow cursor options',
+        caption: 'Four customisable cursor characters.',
+      },
+    ],
+    status: 'Public beta · macOS 14+',
+    linkDemo: 'https://github.com/smcnab1/pokelet/releases',
+    linkDemoLabel: 'Download Pokelet',
+    linkGithub: 'https://github.com/smcnab1/pokelet',
+    stacks: 'Swift, SwiftUI, macOS, Xcode',
+    isShow: true,
+    isFeatured: true,
+    caseStudyPublishedAt: NEW_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: NEW_CASE_STUDIES_AT,
+    sortOrder: 2,
+  },
+  {
+    id: 'simugen',
+    title: 'SimuGen - AI Clinical Simulation Generator',
+    slug: 'simugen',
+    description:
+      'A ChatGPT plugin for designing structured, fictional clinical simulation scenarios.',
+    content: `## The problem
+
+Designing clinical simulation scenarios takes time, especially when educators need to align a patient presentation, learning objectives, learner actions and debriefing materials. Clinical content also requires careful checking before it can be used in teaching.
+
+## The solution and features
+
+SimuGen is an open-source ChatGPT plugin for building structured clinical simulation scenarios. It can turn a clinical topic or educational brief into a fictional patient presentation, observations, scenario progression, expected learner actions, faculty notes, equipment requirements and debrief questions. Outputs can be adapted to different professions, learner levels and clinical settings.
+
+## Technologies and my contribution
+
+I designed and built the plugin around packaged instructions and reference materials, combining healthcare simulation experience with conversational AI workflows. The project uses a skills-based plugin architecture and a static Next.js website, without its own backend or database.
+
+## Clinical safety and current status
+
+SimuGen is intended for fictional healthcare education scenarios, not real-patient diagnosis or treatment. It uses synthetic patient information and is designed to favour verifiable clinical guidance; educators remain responsible for reviewing accuracy and suitability before use. The open-source plugin continues to be developed and tested.
+
+[Explore SimuGen](https://smcnab1.github.io/SimuGen/) or [view the source on GitHub](https://github.com/smcnab1/SimuGen).`,
+    image: '/images/projects/simugen-chat.webp',
+    imageAlt:
+      'Example fictional clinical simulation scenario generated using SimuGen',
+    imageCaption:
+      'Illustrative SimuGen output using entirely fictional patient information.',
+    gallery: [
+      {
+        image: '/images/projects/simugen-website.webp',
+        alt: 'Public SimuGen website introducing the clinical simulation plugin',
+        caption: 'The public SimuGen project website.',
+      },
+    ],
+    status: 'Open-source ChatGPT plugin · Active development',
+    linkDemo: 'https://smcnab1.github.io/SimuGen/',
+    linkDemoLabel: 'Project website',
+    linkGithub: 'https://github.com/smcnab1/SimuGen',
+    stacks: 'ChatGPT plugin, Markdown, YAML, Next.js, TypeScript',
+    isShow: true,
+    isFeatured: true,
+    caseStudyPublishedAt: NEW_CASE_STUDIES_AT,
+    caseStudyUpdatedAt: NEW_CASE_STUDIES_AT,
+    sortOrder: 3,
+  },
+  {
     id: 'modumate',
     title: 'ModuMate - Educational Content Toolkit',
     slug: 'modumate',
@@ -82,7 +182,7 @@ This is a live personal web application and public demonstration, with fictional
     isFeatured: false,
     caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
     caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
-    sortOrder: 2,
+    sortOrder: 4,
   },
   {
     id: 'cheatsheets-remastered',
@@ -131,7 +231,7 @@ Released for macOS in the Raycast Store. [Install Cheatsheets Remastered](https:
     isFeatured: false,
     caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
     caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
-    sortOrder: 3,
+    sortOrder: 5,
   },
   {
     id: 'gradient-generator',
@@ -180,7 +280,7 @@ Released for macOS in the Raycast Store. [Install Gradient Generator](https://ww
     isFeatured: false,
     caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
     caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
-    sortOrder: 4,
+    sortOrder: 6,
   },
   {
     id: 'luxafor-controller',
@@ -225,7 +325,7 @@ Released for macOS in the Raycast Store. [Install Luxafor Controller](https://ww
     isFeatured: false,
     caseStudyPublishedAt: ADDITIONAL_CASE_STUDIES_AT,
     caseStudyUpdatedAt: ADDITIONAL_CASE_STUDIES_AT,
-    sortOrder: 5,
+    sortOrder: 7,
   },
   {
     id: 'portfolio-1',
@@ -260,6 +360,6 @@ You can [visit the live website](https://sammcnab.co.uk) or [view its public sou
     isFeatured: false,
     caseStudyPublishedAt: INITIAL_CASE_STUDIES_AT,
     caseStudyUpdatedAt: INITIAL_CASE_STUDIES_AT,
-    sortOrder: 6,
+    sortOrder: 8,
   },
 ];
