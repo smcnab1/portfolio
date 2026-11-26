@@ -18,3 +18,5 @@ reviews:
   path_instructions:
     - path: "src/**"
       instructions: "Check Next.js navigation, keyboard focus, responsive layouts and regressions in page load performance."
+    - path: ".github/workflows/**"
+      instructions: "Keep the lint, TypeScript, Jest and production build checks effective for pull requests."
