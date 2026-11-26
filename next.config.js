@@ -34,6 +34,15 @@ const nextConfig = {
   // Note: swcMinify is enabled by default in Next.js 13+
   // Optimize static generation
   trailingSlash: false,
+  async redirects() {
+    return [
+      {
+        source: '/projects/healthcare-simulation',
+        destination: '/projects/simhq',
+        permanent: true,
+      },
+    ];
+  },
   // Headers for optimization and security
   async headers() {
     return [

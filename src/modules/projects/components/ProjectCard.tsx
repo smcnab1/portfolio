@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import { AiFillPushpin as PinIcon } from 'react-icons/ai';
-import { HiOutlineArrowSmRight as ViewIcon } from 'react-icons/hi';
 
 import Card from '@/common/components/elements/Card';
 import Image from '@/common/components/elements/Image';
-import Tooltip from '@/common/components/elements/Tooltip';
-import { STACKS } from '@/common/constant/stacks';
 import { parseStacks } from '@/common/helpers';
 import { ProjectItemProps } from '@/common/types/projects';
 
@@ -14,49 +11,54 @@ const ProjectCard = ({
   slug,
   description,
   image,
+  imageAlt,
   stacks,
+  status,
   isFeatured,
 }: ProjectItemProps) => {
   const stacksArray = parseStacks(stacks);
 
   return (
-    <Link href={`/projects/${slug}`}>
-      <Card className='group relative cursor-pointer border border-neutral-200 dark:border-neutral-900 lg:hover:scale-[102%]'>
-        {isFeatured && (
-          <div className='absolute right-0 top-0 z-[2] flex items-center gap-1 rounded-bl-xl rounded-tr-xl bg-lime-300 px-2 py-1 text-[13px] font-medium text-emerald-950'>
-            <PinIcon size={15} />
-            <span>Featured</span>
-          </div>
-        )}
+    <Link
+      href={`/projects/${slug}`}
+      className='group block rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-600'
+    >
+      <Card className='h-full overflow-hidden border border-neutral-200 dark:border-neutral-800'>
         <div className='relative'>
-          <Image
-            src={image || '/images/placeholder.png'}
-            width={400}
-            height={200}
-            alt={title}
-            className='h-48 rounded-t-xl object-cover object-left'
-          />
-          <div className='absolute left-0 top-0 flex flex h-full w-full items-center justify-center gap-1 rounded-t-xl bg-black text-sm font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-80'>
-            <span>View Project</span>
-            <ViewIcon size={20} />
-          </div>
+          {image && (
+            <Image
+              src={image}
+              width={600}
+              height={320}
+              sizes='(max-width: 640px) 100vw, 50vw'
+              alt={imageAlt || title}
+              className='h-48 w-full object-cover object-center'
+            />
+          )}
+          {isFeatured && (
+            <span className='absolute right-0 top-0 flex items-center gap-1 rounded-bl-xl bg-lime-300 px-2 py-1 text-xs font-medium text-emerald-950'>
+              <PinIcon aria-hidden='true' size={15} /> Featured
+            </span>
+          )}
         </div>
-        <div className='space-y-2 p-5'>
-          <div className='flex justify-between'>
-            <div className='cursor-pointer  text-lg text-neutral-700 transition-all duration-300 dark:text-neutral-300 dark:group-hover:text-teal-400 lg:group-hover:text-teal-600'>
-              {title}
-            </div>
-          </div>
-          <p className='text-[15px] leading-relaxed text-neutral-700 dark:text-neutral-400'>
+        <div className='space-y-3 p-5'>
+          {status && (
+            <p className='text-xs font-medium uppercase tracking-wide text-teal-800 dark:text-teal-300'>
+              {status}
+            </p>
+          )}
+          <h2 className='text-lg font-semibold leading-snug text-neutral-800 group-hover:text-teal-700 dark:text-neutral-200 dark:group-hover:text-teal-400'>
+            {title}
+          </h2>
+          <p className='text-sm leading-relaxed text-neutral-700 dark:text-neutral-300'>
             {description}
           </p>
-          <div className='flex flex-wrap items-center gap-3 pt-2'>
-            {stacksArray?.map((stack: string, index: number) => (
-              <div key={index}>
-                <Tooltip title={stack}>{STACKS[stack]}</Tooltip>
-              </div>
-            ))}
-          </div>
+          <p className='text-xs text-neutral-600 dark:text-neutral-400'>
+            {stacksArray?.join(' · ')}
+          </p>
+          <span className='inline-block text-sm font-medium text-teal-700 underline underline-offset-4 dark:text-teal-400'>
+            Read case study
+          </span>
         </div>
       </Card>
     </Link>

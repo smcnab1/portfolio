@@ -29,7 +29,6 @@ const Sidebar = () => {
   return (
     <div
       id='sidebar'
-      // className='flex flex-col space-y-6 transition-all duration-300 lg:py-8'
       className='sticky top-0 z-10 flex flex-col space-y-6 transition-all duration-300 lg:py-6'
     >
       <Profile isScrolled={isScrolled} />

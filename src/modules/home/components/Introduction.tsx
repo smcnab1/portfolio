@@ -1,19 +1,39 @@
-const Introduction = () => {
-  return (
-    <section className='bg-cover bg-no-repeat '>
-      <div className='space-y-3'>
-        <div className='flex gap-2  text-2xl font-medium lg:text-3xl'>
-          <h1>Hi, I&apos;m Sam</h1>{' '}
-          <div className='ml-1 animate-waving-hand'>👋</div>
-        </div>
-      </div>
+import Link from 'next/link';
 
-      <p className='mt-6 leading-[1.8] text-neutral-800 dark:text-neutral-300 md:leading-loose'>
-        I&apos;m a Senior Lecturer, Registered Paramedic and specialist in
-        Healthcare Simulation & Immersive Technologies.
-      </p>
-    </section>
-  );
-};
+const Introduction = () => (
+  <section className='space-y-5'>
+    <p className='text-sm font-medium uppercase tracking-wide text-teal-700 dark:text-teal-400'>
+      Healthcare · Education · Software
+    </p>
+    <h1 className='text-3xl font-semibold leading-tight sm:text-4xl'>
+      Hi, I&apos;m Sam McNab.
+    </h1>
+    <p className='max-w-3xl text-lg leading-relaxed text-neutral-800 dark:text-neutral-300'>
+      I&apos;m a Senior Lecturer, Registered Paramedic and founder of SimHQ. I
+      combine clinical practice and simulation leadership with software
+      development to make healthcare education and its operations work better.
+    </p>
+    <div className='flex flex-wrap gap-3 pt-1 text-sm font-medium'>
+      <Link
+        href='/about'
+        className='rounded-lg bg-neutral-800 px-4 py-2.5 text-white hover:bg-neutral-700 dark:bg-neutral-200 dark:text-neutral-900 dark:hover:bg-white'
+      >
+        Explore my experience
+      </Link>
+      <Link
+        href='/projects'
+        className='rounded-lg border border-neutral-300 px-4 py-2.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800'
+      >
+        View projects
+      </Link>
+      <Link
+        href='/contact'
+        className='rounded-lg border border-neutral-300 px-4 py-2.5 hover:bg-neutral-100 dark:border-neutral-700 dark:hover:bg-neutral-800'
+      >
+        Contact me
+      </Link>
+    </div>
+  </section>
+);
 
 export default Introduction;

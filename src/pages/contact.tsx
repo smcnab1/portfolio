@@ -12,7 +12,11 @@ const PAGE_DESCRIPTION =
 const ContactPage: NextPage = () => {
   return (
     <>
-      <NextSeo title={`${PAGE_TITLE} - Sam McNab`} />
+      <NextSeo
+        title={`${PAGE_TITLE} | Sam McNab`}
+        description={PAGE_DESCRIPTION}
+        canonical='https://sammcnab.co.uk/contact'
+      />
       <Container data-aos='fade-up'>
         <PageHeading title={PAGE_TITLE} description={PAGE_DESCRIPTION} />
         <Contact />

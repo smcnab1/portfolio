@@ -8,12 +8,16 @@ import Projects from '@/modules/projects';
 
 const PAGE_TITLE = 'Projects';
 const PAGE_DESCRIPTION =
-  'Several projects that I have worked on, both private and open source.';
+  'Selected software projects and case studies, including SimHQ and this portfolio website.';
 
 const ProjectsPage: NextPage = () => {
   return (
     <>
-      <NextSeo title={`${PAGE_TITLE} - Sam McNab`} />
+      <NextSeo
+        title={`${PAGE_TITLE} | Sam McNab`}
+        description={PAGE_DESCRIPTION}
+        canonical='https://sammcnab.co.uk/projects'
+      />
       <Container data-aos='fade-up'>
         <PageHeading title={PAGE_TITLE} description={PAGE_DESCRIPTION} />
         <Projects projects={PROJECTS} />

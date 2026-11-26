@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import clsx from 'clsx';
 
 interface MobileMenuButtonProps {
@@ -17,48 +16,27 @@ const MobileMenuButton = ({
   const menuSpanData = [{ index: 1 }, { index: 2 }, { index: 3 }];
 
   return (
-    <StyledMenu className='flex lg:hidden' onClick={handleMenuToggle}>
+    <button
+      type='button'
+      aria-label={expandMenu ? 'Close navigation menu' : 'Open navigation menu'}
+      aria-expanded={expandMenu}
+      aria-controls='mobile-navigation'
+      className='flex h-8 w-8 flex-col justify-between rounded p-1 lg:hidden'
+      onClick={handleMenuToggle}
+    >
       {menuSpanData.map((item) => (
-        <StyledMenuSpan
+        <span
           key={item.index}
           className={clsx(
-            'bg-neutral-950 dark:bg-neutral-100 ',
-            expandMenu && 'active',
+            'h-[3px] w-full rounded-full bg-neutral-950 transition-transform duration-300 dark:bg-neutral-100',
+            expandMenu && item.index === 1 && 'translate-y-[10px] rotate-45',
+            expandMenu && item.index === 2 && 'opacity-0',
+            expandMenu && item.index === 3 && '-translate-y-[10px] -rotate-45',
           )}
         />
       ))}
-    </StyledMenu>
+    </button>
   );
 };
 
 export default MobileMenuButton;
-
-const StyledMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 21px;
-  width: 26px;
-  cursor: pointer;
-`;
-
-const StyledMenuSpan = styled.span`
-  width: 100%;
-  height: 3px;
-  transition: all 0.5s ease;
-  border-radius: 10px;
-
-  &.active:nth-of-type(1),
-  &.active:nth-of-type(3) {
-    transform-origin: left;
-  }
-  &.active:nth-of-type(1) {
-    transform: rotate(45deg);
-  }
-  &.active:nth-of-type(2) {
-    width: 0;
-  }
-  &.active:nth-of-type(3) {
-    transform: rotate(-45deg);
-  }
-`;

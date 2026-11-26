@@ -3,3 +3,6 @@ contact_links:
   - name: Get in touch with the developer
     url: https://sammcnab.co.uk/contact
     about: Please do NOT use this email to post issues or feature requests (only important business/personal contact).
+  - name: Report a vulnerability privately
+    url: https://github.com/smcnab1/portfolio/security/advisories/new
+    about: Send security reports directly to the maintainer.

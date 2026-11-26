@@ -1,9 +1,17 @@
-import { useWindowSize } from 'usehooks-ts';
+import { useSyncExternalStore } from 'react';
 
-const useIsMobile = () => {
-  const { width } = useWindowSize();
+const mediaQuery = '(max-width: 1023px)';
 
-  return width < 821;
+const subscribe = (onChange: () => void) => {
+  const query = window.matchMedia(mediaQuery);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
 };
+
+const getSnapshot = () => window.matchMedia(mediaQuery).matches;
+
+// Match the server render for hydration, then update to the viewport value.
+const useIsMobile = () =>
+  useSyncExternalStore(subscribe, getSnapshot, () => false);
 
 export default useIsMobile;

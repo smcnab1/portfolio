@@ -1,7 +1,7 @@
+import Link from 'next/link';
+
 import Image from '@/common/components/elements/Image';
 import MDXComponent from '@/common/components/elements/MDXComponent';
-import Tooltip from '@/common/components/elements/Tooltip';
-import { STACKS } from '@/common/constant/stacks';
 import { parseStacks } from '@/common/helpers';
 import { ProjectItemProps } from '@/common/types/projects';
 
@@ -10,47 +10,108 @@ import ProjectLink from './ProjectLink';
 const ProjectDetail = ({
   title,
   image,
+  imageAlt,
+  imageCaption,
+  gallery,
+  status,
   stacks,
   linkDemo,
+  linkDemoLabel,
   linkGithub,
   content,
 }: ProjectItemProps) => {
   const stacksArray = parseStacks(stacks);
 
   return (
-    <div className='space-y-8'>
-      <div className='flex flex-col items-start justify-between gap-5 sm:flex-row lg:flex-row lg:items-center'>
-        <div className='flex flex-wrap items-center gap-2'>
-          <span className='mb-1 text-[15px] text-neutral-700 dark:text-neutral-300'>
-            Tech Stack :
-          </span>
-          <div className='flex flex-wrap items-center gap-3'>
-            {stacksArray?.map((stack: string, index: number) => (
-              <div key={index}>
-                <Tooltip title={stack}>{STACKS[stack]}</Tooltip>
-              </div>
+    <article className='space-y-8'>
+      <div className='flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between'>
+        <div className='space-y-3'>
+          {status && (
+            <p className='text-sm font-medium text-teal-800 dark:text-teal-300'>
+              {status}
+            </p>
+          )}
+          <div className='flex flex-wrap gap-2' aria-label='Technologies used'>
+            {stacksArray?.map((stack) => (
+              <span
+                key={stack}
+                className='rounded-full border border-neutral-300 px-2.5 py-1 text-xs text-neutral-700 dark:border-neutral-700 dark:text-neutral-300'
+              >
+                {stack}
+              </span>
             ))}
           </div>
         </div>
         <ProjectLink
           title={title}
           linkDemo={linkDemo}
+          linkDemoLabel={linkDemoLabel}
           linkGithub={linkGithub}
         />
       </div>
-      <Image
-        src={image || '/images/placeholder.png'}
-        width={800}
-        height={400}
-        alt={title}
-        className='hover:scale-105'
-      />
+      {image && (
+        <figure className='overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800'>
+          <Image
+            src={image}
+            width={1200}
+            height={700}
+            sizes='(max-width: 1024px) 100vw, 800px'
+            alt={imageAlt || title}
+            className='h-auto w-full'
+          />
+          {imageCaption && (
+            <figcaption className='px-4 py-3 text-xs text-neutral-600 dark:text-neutral-400'>
+              {imageCaption}
+            </figcaption>
+          )}
+        </figure>
+      )}
       {content && (
-        <div className='mt-5 space-y-6 leading-[1.8] dark:text-neutral-300'>
+        <div className='space-y-5 leading-relaxed text-neutral-800 dark:text-neutral-300'>
           <MDXComponent>{content}</MDXComponent>
         </div>
       )}
-    </div>
+      {gallery && gallery.length > 0 && (
+        <section aria-label='More project screenshots' className='space-y-3'>
+          <h2 className='text-lg font-semibold'>More screenshots</h2>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            {gallery.map(({ image: galleryImage, alt, caption }) => (
+              <figure
+                key={galleryImage}
+                className='overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800'
+              >
+                <Image
+                  src={galleryImage}
+                  width={1400}
+                  height={875}
+                  sizes='(max-width: 640px) 100vw, 400px'
+                  alt={alt}
+                  className='h-auto w-full'
+                />
+                <figcaption className='px-4 py-3 text-xs text-neutral-600 dark:text-neutral-400'>
+                  {caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+      <p className='border-t border-neutral-200 pt-6 text-sm dark:border-neutral-800'>
+        <Link
+          href='/projects'
+          className='text-teal-700 underline underline-offset-4 dark:text-teal-400'
+        >
+          View all projects
+        </Link>{' '}
+        ·{' '}
+        <Link
+          href='/contact'
+          className='text-teal-700 underline underline-offset-4 dark:text-teal-400'
+        >
+          Get in touch
+        </Link>
+      </p>
+    </article>
   );
 };
 

@@ -18,7 +18,7 @@ const MenuItem = ({
 }: MenuItemProps) => {
   const { hideNavbar } = useContext(MenuContext);
   const [isHovered, setIsHovered] = useState(false);
-  const isExternalUrl = href?.includes('http');
+  const isExternalUrl = href?.startsWith('http');
   const isHashLink = href === '#';
   const router = useRouter();
 
@@ -84,6 +84,8 @@ const MenuItem = ({
     <Link
       href={href}
       target={isExternalUrl ? '_blank' : ''}
+      rel={isExternalUrl ? 'noopener noreferrer' : undefined}
+      className='rounded-lg'
       onClick={handleClick}
     >
       {itemComponent()}
